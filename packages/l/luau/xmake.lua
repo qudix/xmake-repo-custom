@@ -13,7 +13,7 @@ package("luau")
     add_configs("werror", { description = "Warnings as errors", default = false, type = "boolean" })
     add_configs("externc", { description = "Use extern C for all APIs", default = false, type = "boolean" })
 
-    on_install("x64", function (package)
+    on_install("windows|x64", "linux|x64", "macosx|x64", function (package)
         os.cp(path.join(package:scriptdir(), "port", "xmake.lua"), "xmake.lua")
 
         local configs = {}
