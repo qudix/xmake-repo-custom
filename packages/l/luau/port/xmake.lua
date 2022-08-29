@@ -76,6 +76,7 @@ target("luau.compiler")
     add_deps("luau.ast")
 
     add_includedirs("Compiler/include", { public = true })
+    add_headerfiles("Compiler/include/*.h")
     add_headerfiles("Compiler/include/(Luau/*.h)")
     add_files("Compiler/src/**.cpp")
 
