@@ -55,7 +55,10 @@ target("luau.common")
     set_kind("headeronly")
 
     add_includedirs("Common/include", { interface = true })
-    add_headerfiles("Common/include/(Luau/*.h)")
+    add_headerfiles(
+        "Common/include/(Luau/*.h)",
+        { prefixdir = "luau" }
+    )
 
 target("luau.ast")
     set_kind("static")
@@ -63,7 +66,10 @@ target("luau.ast")
     add_deps("luau.common")
 
     add_includedirs("Ast/include", { public = true })
-    add_headerfiles("Ast/include/(Luau/*.h)")
+    add_headerfiles(
+        "Ast/include/(Luau/*.h)",
+        { prefixdir = "luau" }
+    )
     add_files("Ast/src/**.cpp")
 
     if is_plat("windows") then
@@ -76,8 +82,12 @@ target("luau.compiler")
     add_deps("luau.ast")
 
     add_includedirs("Compiler/include", { public = true })
-    add_headerfiles("Compiler/include/*.h")
-    add_headerfiles("Compiler/include/(Luau/*.h)")
+    add_headerfiles(
+        "Compiler/include/*.h",
+        "Compiler/include/(Luau/*.h)",
+        { prefixdir = "luau" }
+    )
+
     add_files("Compiler/src/**.cpp")
 
     if has_config("externc") then
@@ -90,7 +100,11 @@ target("luau.analysis")
     add_deps("luau.ast")
 
     add_includedirs("Analysis/include", { public = true })
-    add_headerfiles("Analysis/include/(Luau/*.h)")
+    add_headerfiles(
+        "Analysis/include/(Luau/*.h)",
+        { prefixdir = "luau" }
+    )
+
     add_files("Analysis/src/**.cpp")
 
     if is_plat("windows") then
@@ -117,7 +131,11 @@ target("luau.vm")
     add_deps("luau.common")
 
     add_includedirs("VM/include", { public = true })
-    add_headerfiles("VM/include/*.h")
+    add_headerfiles(
+        "VM/include/*.h",
+        { prefixdir = "luau" }
+    )
+
     add_files("VM/src/**.cpp")
     add_files("VM/src/lvmexecute.cpp", { cxflags = "/d2ssa-pre-" })
 
