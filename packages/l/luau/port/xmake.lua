@@ -117,7 +117,10 @@ target("luau.codegen")
     add_deps("luau.common")
 
     add_includedirs("CodeGen/include", { public = true })
-    add_headerfiles("CodeGen/include/(Luau/*.h)")
+    add_headerfiles(
+        "CodeGen/include/(Luau/*.h)",
+        { prefixdir = "luau" }
+    )
     add_files("CodeGen/src/**.cpp")
 
     if is_plat("windows") then
