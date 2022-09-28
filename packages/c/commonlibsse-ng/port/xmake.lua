@@ -19,15 +19,7 @@ set_optimize("faster")
 -- set policies
 set_policy("build.optimization.lto", true)
 
--- add packages
-add_requires("fmt", "rapidcsv", "spdlog")
-
 -- add options
-option("skse_xbyak")
-    set_default(false)
-    set_description("Enable trampoline support for Xbyak")
-    add_defines("SKSE_SUPPORT_XBYAK=1")
-
 option("skyrim_se")
     set_default(true)
     set_description("Enable runtime support for Skyrim SE")
@@ -43,6 +35,18 @@ option("skyrim_vr")
     set_description("Enable runtime support for Skyrim VR")
     add_defines("ENABLE_SKYRIM_VR=1")
 
+option("skse_xbyak")
+    set_default(false)
+    set_description("Enable trampoline support for Xbyak")
+    add_defines("SKSE_SUPPORT_XBYAK=1")
+
+-- add packages
+add_requires("fmt", "rapidcsv", "spdlog")
+
+if has_config("skse_xbyak") then
+    add_requires("xbyak")
+end
+
 -- targets
 target("CommonLibSSE")
     set_kind("static")
@@ -50,8 +54,12 @@ target("CommonLibSSE")
     -- add packages
     add_packages("fmt", "rapidcsv", "spdlog")
 
+    if has_config("skse_xbyak") then
+        add_packages("xbyak")
+    end
+
     -- add options
-    add_options("skse_xbyak", "skyrim_se", "skyrim_ae", "skyrim_vr")
+    add_options("skyrim_se", "skyrim_ae", "skyrim_vr", "skse_xbyak")
 
     -- add system links
     add_syslinks("version", "user32", "shell32", "ole32", "advapi32")
