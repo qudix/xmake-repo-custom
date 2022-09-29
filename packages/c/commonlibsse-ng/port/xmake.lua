@@ -24,21 +24,25 @@ option("skyrim_se")
     set_default(true)
     set_description("Enable runtime support for Skyrim SE")
     add_defines("ENABLE_SKYRIM_SE=1")
+option_end()
 
 option("skyrim_ae")
     set_default(true)
     set_description("Enable runtime support for Skyrim AE")
     add_defines("ENABLE_SKYRIM_AE=1")
+option_end()
 
 option("skyrim_vr")
     set_default(true)
     set_description("Enable runtime support for Skyrim VR")
     add_defines("ENABLE_SKYRIM_VR=1")
+option_end()
 
 option("skse_xbyak")
     set_default(false)
     set_description("Enable trampoline support for Xbyak")
     add_defines("SKSE_SUPPORT_XBYAK=1")
+option_end()
 
 -- add packages
 add_requires("fmt", "rapidcsv", "spdlog")
